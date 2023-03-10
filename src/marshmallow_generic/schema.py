@@ -66,3 +66,44 @@ class GenericSchema(GenericInsightMixin[_T], Schema):
             correctly based on the type argument passed to a specific subclass.
             """
             ...
+
+        @overload  # type: ignore[override]
+        def loads(
+            self,
+            json_data: str,
+            *,
+            many: Literal[True],
+            partial: Union[bool, Sequence[str], set[str], None] = None,
+            unknown: Optional[str] = None,
+            **kwargs: Any,
+        ) -> list[_T]:
+            ...
+
+        @overload
+        def loads(
+            self,
+            json_data: str,
+            *,
+            many: Optional[Literal[False]] = None,
+            partial: Union[bool, Sequence[str], set[str], None] = None,
+            unknown: Optional[str] = None,
+            **kwargs: Any,
+        ) -> _T:
+            ...
+
+        def loads(
+            self,
+            json_data: str,
+            *,
+            many: Optional[bool] = None,
+            partial: Union[bool, Sequence[str], set[str], None] = None,
+            unknown: Optional[str] = None,
+            **kwargs: Any,
+        ) -> Union[list[_T], _T]:
+            """
+            Same as `marshmallow.Schema.loads` at runtime.
+
+            Annotations ensure that type checkers will infer the return type
+            correctly based on the type argument passed to a specific subclass.
+            """
+            ...

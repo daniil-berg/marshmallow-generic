@@ -20,7 +20,7 @@ class GenericSchemaTestCase(TestCase):
         mock__get_type_arg.assert_called_once_with()
         mock_cls.assert_called_once_with(**mock_data)
 
-    def test_load(self) -> None:
+    def test_load_and_loads(self) -> None:
         """Mainly for static type checking purposes."""
 
         class Foo:
@@ -29,9 +29,16 @@ class GenericSchemaTestCase(TestCase):
         class TestSchema(schema.GenericSchema[Foo]):
             pass
 
-        single: Foo = TestSchema().load({})
+        single: Foo
+        single = TestSchema().load({})
+        self.assertIsInstance(single, Foo)
+        single = TestSchema().loads("{}")
         self.assertIsInstance(single, Foo)
 
-        multiple: list[Foo] = TestSchema().load([{}], many=True)
+        multiple: list[Foo]
+        multiple = TestSchema().load([{}], many=True)
+        self.assertIsInstance(multiple, list)
+        self.assertIsInstance(multiple[0], Foo)
+        multiple = TestSchema().loads("[{}]", many=True)
         self.assertIsInstance(multiple, list)
         self.assertIsInstance(multiple[0], Foo)
