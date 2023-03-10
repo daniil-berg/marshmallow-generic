@@ -1,3 +1,5 @@
+"""Typed overloads for some of the `marshmallow.decorators` module."""
+
 from collections.abc import Callable
 from typing import Any, Optional, TypeVar, overload
 from typing_extensions import ParamSpec

@@ -16,5 +16,8 @@ limitations under the License."""
 __version__ = "0.0.1"
 
 __doc__ = """
-PLACEHOLDER
+Generic schema with full typing support and minimal boilerplate.
 """
+
+from .decorators import post_load
+from .schema import GenericSchema
