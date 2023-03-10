@@ -28,6 +28,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "License :: OSI Approved :: Apache Software License",
     "Intended Audience :: Developers",
+    "Typing :: Typed",
 ]
 dynamic = [
     "dependencies",
