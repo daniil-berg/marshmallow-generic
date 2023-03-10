@@ -1,6 +1,5 @@
 from typing import Any, Generic, Optional, TypeVar, get_args, get_origin
 
-
 _T = TypeVar("_T")
 
 

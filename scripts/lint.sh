@@ -12,5 +12,7 @@ mypy
 echo
 
 echo 'Linting source and test files...'
-flake8 src/ tests/
+isort src/ tests/ --check-only
+ruff src/ tests/
+black src/ tests/ --check
 echo -e 'No issues found.'

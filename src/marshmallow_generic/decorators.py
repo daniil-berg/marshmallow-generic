@@ -4,7 +4,6 @@ from typing_extensions import ParamSpec
 
 from marshmallow.decorators import post_load as _post_load
 
-
 _R = TypeVar("_R")
 _P = ParamSpec("_P")
 

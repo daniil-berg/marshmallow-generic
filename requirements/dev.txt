@@ -2,7 +2,8 @@
 black
 build
 coverage[toml]
-flake8
+isort
 mkdocs-material
 mkdocstrings[python]
 mypy
+ruff
