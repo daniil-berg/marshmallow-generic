@@ -12,7 +12,9 @@ class GenericInsightMixinTestCase(TestCase):
         mock_super.return_value = MagicMock(__init_subclass__=mock_super_meth)
 
         # Should be `None` by default:
-        self.assertIsNone(_util.GenericInsightMixin._type_arg)  # type: ignore[misc]
+        self.assertIsNone(
+            _util.GenericInsightMixin._type_arg  # type: ignore[misc]
+        )
 
         # If the mixin type argument was not specified (still generic),
         # ensure that the attribute remains `None` on the subclass:
