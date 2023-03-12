@@ -17,7 +17,7 @@ class GenericSchemaTestCase(TestCase):
         # Explicit annotation to possibly catch mypy errors:
         output: Foo = schema_obj.instantiate(mock_data)
         self.assertIs(mock_cls.return_value, output)
-        mock__get_type_arg.assert_called_once_with()
+        mock__get_type_arg.assert_called_once_with(0)
         mock_cls.assert_called_once_with(**mock_data)
 
     def test_load_and_loads(self) -> None:

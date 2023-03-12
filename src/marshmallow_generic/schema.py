@@ -10,13 +10,13 @@ from typing import TYPE_CHECKING, Any, Literal, Optional, TypeVar, Union, overlo
 
 from marshmallow import Schema
 
-from ._util import GenericInsightMixin
+from ._util import GenericInsightMixin1
 from .decorators import post_load
 
 Model = TypeVar("Model")
 
 
-class GenericSchema(GenericInsightMixin[Model], Schema):
+class GenericSchema(GenericInsightMixin1[Model], Schema):
     """
     Generic schema parameterized by a **`Model`** class.
 
@@ -65,7 +65,7 @@ class GenericSchema(GenericInsightMixin[Model], Schema):
         Returns:
             Instance of the schema's **`Model`** initialized with `**data`
         """
-        return self._get_type_arg()(**data)
+        return self._get_type_arg(0)(**data)
 
     if TYPE_CHECKING:
 
