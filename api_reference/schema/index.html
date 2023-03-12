@@ -326,6 +326,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#marshmallow_generic.schema.GenericSchema.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marshmallow_generic.schema.GenericSchema.dump" class="md-nav__link">
+    dump()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marshmallow_generic.schema.GenericSchema.dumps" class="md-nav__link">
+    dumps()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#marshmallow_generic.schema.GenericSchema.instantiate" class="md-nav__link">
     instantiate()
   </a>
@@ -413,6 +434,27 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#marshmallow_generic.schema.GenericSchema.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marshmallow_generic.schema.GenericSchema.dump" class="md-nav__link">
+    dump()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marshmallow_generic.schema.GenericSchema.dumps" class="md-nav__link">
+    dumps()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#marshmallow_generic.schema.GenericSchema.instantiate" class="md-nav__link">
     instantiate()
   </a>
@@ -484,7 +526,7 @@ documentation of <a class="autorefs autorefs-external" href="https://marshmallow
 
 
 <h2 id="marshmallow_generic.schema.GenericSchema" class="doc doc-heading">
-        <code>GenericSchema</code>
+        <span class="doc doc-object-name doc-class-name">GenericSchema</span>
 
 
 <a href="#marshmallow_generic.schema.GenericSchema" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -492,7 +534,7 @@ documentation of <a class="autorefs autorefs-external" href="https://marshmallow
 
   <div class="doc doc-contents ">
       <p class="doc doc-class-bases">
-        Bases: <code><span title="marshmallow_generic._util.GenericInsightMixin">GenericInsightMixin</span>[<span title="marshmallow_generic.schema.Model">Model</span>]</code>, <code><a class="autorefs autorefs-external" title="marshmallow.Schema" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema">Schema</a></code></p>
+        Bases: <code><span title="marshmallow_generic._util.GenericInsightMixin1">GenericInsightMixin1</span>[<span title="marshmallow_generic.schema.Model">Model</span>]</code>, <code><a class="autorefs autorefs-external" title="marshmallow.Schema" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema">Schema</a></code></p>
 
   
       <p>Generic schema parameterized by a <strong><code>Model</code></strong> class.</p>
@@ -533,11 +575,269 @@ type argument for deserialization to work properly:</p>
 
 
 
+<h3 id="marshmallow_generic.schema.GenericSchema.__init__" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">__init__</span>
+
+
+<a href="#marshmallow_generic.schema.GenericSchema.__init__" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="fm">__init__</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">load_only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">dump_only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Emits a warning, if the <code>many</code> argument is not <code>None</code>.</p>
+<p>Otherwise the same as in <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema"><code>marshmallow.Schema</code></a>.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>only</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="collections.abc.Sequence">Sequence</span>[str], set[str], None]</code>
+          </td>
+          <td><p>Whitelist of the declared fields to select when instantiating
+the Schema. If <code>None</code>, all fields are used. Nested fields can
+be represented with dot delimiters.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>exclude</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="collections.abc.Sequence">Sequence</span>[str], set[str]]</code>
+          </td>
+          <td><p>Blacklist of the declared fields to exclude when instantiating
+the Schema. If a field appears in both <code>only</code> and <code>exclude</code>,
+it is not used. Nested fields can be represented with dot
+delimiters.</p></td>
+          <td>
+                <code>()</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>context</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[dict[str, <span title="typing.Any">Any</span>], None]</code>
+          </td>
+          <td><p>Optional context passed to <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Method"><code>Method</code></a> and <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Function"><code>Function</code></a> fields.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>load_only</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="collections.abc.Sequence">Sequence</span>[str], set[str]]</code>
+          </td>
+          <td><p>Fields to skip during serialization (write-only fields)</p></td>
+          <td>
+                <code>()</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>dump_only</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="collections.abc.Sequence">Sequence</span>[str], set[str]]</code>
+          </td>
+          <td><p>Fields to skip during deserialization (read-only fields)</p></td>
+          <td>
+                <code>()</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>partial</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[bool, <span title="collections.abc.Sequence">Sequence</span>[str], set[str]]</code>
+          </td>
+          <td><p>Whether to ignore missing fields and not require any fields
+declared. Propagates down to <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested"><code>Nested</code></a> fields as well. If its value is an
+iterable, only missing fields listed in that iterable will be
+ignored. Use dot delimiters to specify nested fields.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>unknown</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>Whether to exclude, include, or raise an error for unknown
+fields in the data. Use <code>EXCLUDE</code>, <code>INCLUDE</code> or <code>RAISE</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>many</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[bool]</code>
+          </td>
+          <td><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Specifying this option schema-wide undermines the type
+safety that this class aims to provide and passing any
+value other than <code>None</code> will trigger a warning. Use the
+method-specific <code>many</code> parameter, when calling
+<a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.dump"><code>dump</code></a>/
+<a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.dumps"><code>dumps</code></a> or
+<a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.load"><code>load</code></a>/
+<a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.loads"><code>loads</code></a> instead.</p>
+</div></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="marshmallow_generic.schema.GenericSchema.dump" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">dump</span>
+
+
+<a href="#marshmallow_generic.schema.GenericSchema.dump" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">dump</span><span class="p">(</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Model</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">]],</span> <span class="o">*</span><span class="p">,</span> <span class="n">many</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Serializes <strong><code>Model</code></strong> objects to native Python data types.</p>
+<p>Same as <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.dump"><code>marshmallow.Schema.dump</code></a> at runtime.</p>
+<p>Annotations ensure that type checkers will infer the return type
+correctly based on the <code>many</code> argument, and also enforce the <code>obj</code>
+argument to be an a <code>list</code> of <strong><code>Model</code></strong> instances, if <code>many</code> is
+set to <code>True</code> or a single instance of it, if <code>many</code> is <code>False</code>
+(or omitted).</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>obj</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="marshmallow_generic.schema.Model">Model</span>, <span title="collections.abc.Iterable">Iterable</span>[<span title="marshmallow_generic.schema.Model">Model</span>]]</code>
+          </td>
+          <td><p>The object or iterable of objects to serialize</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>many</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[bool]</code>
+          </td>
+          <td><p>Whether to serialize <code>obj</code> as a collection. If <code>None</code>, the
+value for <code>self.many</code> is used.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict[str, <span title="typing.Any">Any</span>]</code>
+          </td>
+          <td><p>if <code>many</code> is set to <code>False</code></p></td>
+        </tr>
+        <tr>
+          <td>
+                <code>list[dict[str, <span title="typing.Any">Any</span>]]</code>
+          </td>
+          <td><p>if <code>many</code> is set to <code>True</code></p></td>
+        </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="marshmallow_generic.schema.GenericSchema.dumps" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">dumps</span>
+
+
+<a href="#marshmallow_generic.schema.GenericSchema.dumps" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">dumps</span><span class="p">(</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Model</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Model</span><span class="p">]],</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Same as <a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.dump"><code>dump</code></a>, but returns a JSON-encoded string.</p>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
 <h3 id="marshmallow_generic.schema.GenericSchema.instantiate" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">instantiate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">)</span></code>
+        <span class="doc doc-object-name doc-function-name">instantiate</span>
+
 
 <a href="#marshmallow_generic.schema.GenericSchema.instantiate" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="codehilite"><pre><span></span><code><span class="n">instantiate</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Model</span>
+</code></pre></div>
 
   <div class="doc doc-contents ">
   
@@ -545,10 +845,9 @@ type argument for deserialization to work properly:</p>
 <p>Registered as a <a class="autorefs autorefs-internal" href="../decorators/#marshmallow_generic.decorators.post_load"><code>@post_load</code></a> hook for the schema.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You should probably <strong>not</strong> use this method directly;
-no parsing, transformation or validation of any kind is done
-in this method. The <code>data</code> passed to the <strong><code>Model</code></strong> constructor
-"as is".</p>
+<p>You should probably not use this method directly. No parsing,
+transformation or validation of any kind is done in this method.
+The <code>data</code> is passed to the <strong><code>Model</code></strong> constructor "as is".</p>
 </div>
 
   <p><strong>Parameters:</strong></p>
@@ -603,10 +902,18 @@ into the constructor of the specified <strong><code>Model</code></strong> class.
 
 
 <h3 id="marshmallow_generic.schema.GenericSchema.load" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">unknown</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+        <span class="doc doc-object-name doc-function-name">load</span>
+
 
 <a href="#marshmallow_generic.schema.GenericSchema.load" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="codehilite"><pre><span></span><code><span class="n">load</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">Model</span><span class="p">]</span>
+</code></pre></div>
 
   <div class="doc doc-contents ">
   
@@ -711,10 +1018,19 @@ If <code>None</code>, the value for <code>self.unknown</code> is used.</p></td>
 
 
 <h3 id="marshmallow_generic.schema.GenericSchema.loads" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">unknown</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+        <span class="doc doc-object-name doc-function-name">loads</span>
+
 
 <a href="#marshmallow_generic.schema.GenericSchema.loads" class="headerlink" title="Permanent link">&para;</a></h3>
-
+<div class="codehilite"><pre><span></span><code><span class="n">loads</span><span class="p">(</span>
+    <span class="n">json_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="n">Model</span><span class="p">]</span>
+</code></pre></div>
 
   <div class="doc doc-contents ">
   
