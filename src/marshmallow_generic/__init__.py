@@ -42,10 +42,8 @@ __all__ = [
 ]
 
 from marshmallow import fields
-
-from marshmallow.decorators import (
+from marshmallow.decorators import (  # `post_load` overloaded
     post_dump,
-    # post_load,  # overloaded
     pre_dump,
     pre_load,
     validates,

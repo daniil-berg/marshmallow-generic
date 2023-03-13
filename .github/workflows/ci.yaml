@@ -1,0 +1,70 @@
+name: CI - Tests & Checks
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  unit-tests:
+    name: Execute unit tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+        - '3.9'
+        - '3.10'
+        - '3.11'
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        cache-dependency-path: 'requirements/dev.txt'
+
+    - name: Upgrade pip
+      run: pip install -U pip
+
+    - name: Install marshmallow-generic
+      run: pip install -e '.[dev]'
+
+    - name: Run unit tests for Python ${{ matrix.python-version }}
+      if: ${{ matrix.python-version != '3.11' }}
+      run: python -m tests
+
+    - name: Run unit test coverage script for Python 3.11 and save total percentage
+      if: ${{ matrix.python-version == '3.11' }}
+      run: |
+        total=$(./scripts/test.sh)
+        [[ $? -eq 0 ]] && echo "coverage=${total}" >> $GITHUB_ENV
+    outputs:
+      coverage: ${{ env.coverage }}
+
+  lint:
+    name: Run type checker and linters (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+        - '3.9'
+        - '3.10'
+        - '3.11'
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        cache-dependency-path: 'requirements/dev.txt'
+
+    - name: Upgrade pip
+      run: pip install -U pip
+
+    - name: Install dependencies
+      run: pip install -Ur requirements/dev.txt
+
+    - name: Run checks
+      run: bash scripts/lint.sh
