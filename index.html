@@ -438,13 +438,12 @@
 <p><strong>Documentation</strong>: <a href="http://daniil-berg.github.io/marshmallow-generic" target="_blank"> daniil-berg.github.io/marshmallow-generic </a></p>
 <p><strong>Source Code</strong>: <a href="https://github.com/daniil-berg/marshmallow-generic" target="_blank"> github.com/daniil-berg/marshmallow-generic </a></p>
 <hr />
-<p>Extension for <a href="https://github.com/marshmallow-code/marshmallow" target="_blank"><code>marshmallow</code></a> to make <a href="https://marshmallow.readthedocs.io/en/stable/quickstart.html#deserializing-to-objects" target="_blank">deserialization to objects</a> easier and improve type safety.</p>
+<p>Extension for <a href="https://github.com/marshmallow-code/marshmallow" target="_blank"><strong><code>marshmallow</code></strong></a> to make <a href="https://marshmallow.readthedocs.io/en/stable/quickstart.html#deserializing-to-objects" target="_blank">deserialization to objects</a> easier and improve type safety.</p>
 <p>The main <code>GenericSchema</code> class extends <a href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema" target="_blank"><code>marshmallow.Schema</code></a> making it <strong>generic</strong> in terms of the class that data should be deserialized to, when calling <a href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.load" target="_blank"><code>load</code>/<code>loads</code></a>.</p>
 <p>With <code>GenericSchema</code> there is no need to explicitly write <code>post_load</code> hooks to initialize the object anymore. 🎉</p>
-<p>If the "model" class is (for example) <code>User</code>, it just needs to be passed as the type argument, when subclassing <code>GenericSchema</code>. Depending on whether <code>many</code> is <code>True</code> or not, the output of the <code>load</code>/<code>loads</code> method will then be automatically inferred as either <code>User</code> or <code>list[User]</code> by any competent type checker. ✨</p>
+<p>If the "model" class is (for example) <code>User</code>, it just needs to be passed as the type argument, when subclassing <code>GenericSchema</code>. The output of the <code>load</code>/<code>loads</code> method will then be automatically inferred as either <code>User</code> or <code>list[User]</code> (depending on whether <code>many</code> is <code>True</code> or not) by any competent type checker. ✨</p>
 <h2 id="usage-example">Usage Example<a class="headerlink" href="#usage-example" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">fields</span>
-<span class="kn">from</span> <span class="nn">marshmallow_generic</span> <span class="kn">import</span> <span class="n">GenericSchema</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">marshmallow_generic</span> <span class="kn">import</span> <span class="n">GenericSchema</span><span class="p">,</span> <span class="n">fields</span>
 
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">:</span>

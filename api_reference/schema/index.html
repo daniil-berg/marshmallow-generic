@@ -333,6 +333,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#marshmallow_generic.schema.GenericSchema.__setattr__" class="md-nav__link">
+    __setattr__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#marshmallow_generic.schema.GenericSchema.dump" class="md-nav__link">
     dump()
   </a>
@@ -436,6 +443,13 @@
           <li class="md-nav__item">
   <a href="#marshmallow_generic.schema.GenericSchema.__init__" class="md-nav__link">
     __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marshmallow_generic.schema.GenericSchema.__setattr__" class="md-nav__link">
+    __setattr__()
   </a>
   
 </li>
@@ -589,13 +603,13 @@ type argument for deserialization to work properly:</p>
     <span class="n">dump_only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
     <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">unknown</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">many</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">many</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
   <div class="doc doc-contents ">
   
-      <p>Emits a warning, if the <code>many</code> argument is not <code>None</code>.</p>
+      <p>Emits a warning, if the <code>many</code> argument is not <code>False</code>.</p>
 <p>Otherwise the same as in <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/api_reference.html#marshmallow.Schema"><code>marshmallow.Schema</code></a>.</p>
 
   <p><strong>Parameters:</strong></p>
@@ -639,7 +653,9 @@ delimiters.</p></td>
           <td>
                 <code><span title="typing.Union">Union</span>[dict[str, <span title="typing.Any">Any</span>], None]</code>
           </td>
-          <td><p>Optional context passed to <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Method"><code>Method</code></a> and <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Function"><code>Function</code></a> fields.</p></td>
+          <td><p>Optional context passed to
+<a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Method"><code>Method</code></a> and
+<a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Function"><code>Function</code></a> fields.</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -670,9 +686,11 @@ delimiters.</p></td>
                 <code><span title="typing.Union">Union</span>[bool, <span title="collections.abc.Sequence">Sequence</span>[str], set[str]]</code>
           </td>
           <td><p>Whether to ignore missing fields and not require any fields
-declared. Propagates down to <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested"><code>Nested</code></a> fields as well. If its value is an
-iterable, only missing fields listed in that iterable will be
-ignored. Use dot delimiters to specify nested fields.</p></td>
+declared. Propagates down to
+<a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested"><code>Nested</code></a> fields as well. If its
+value is an iterable, only missing fields listed in that
+iterable will be ignored. Use dot delimiters to specify nested
+fields.</p></td>
           <td>
                 <code>False</code>
           </td>
@@ -691,25 +709,47 @@ fields in the data. Use <code>EXCLUDE</code>, <code>INCLUDE</code> or <code>RAIS
         <tr>
           <td><code>many</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[bool]</code>
+                <code>bool</code>
           </td>
           <td><div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Specifying this option schema-wide undermines the type
-safety that this class aims to provide and passing any
-value other than <code>None</code> will trigger a warning. Use the
-method-specific <code>many</code> parameter, when calling
+<p>Changing this option schema-wide undermines the type
+safety that this class aims to provide. Passing <code>True</code>
+will therefore trigger a warning. You should instead use
+the method-specific <code>many</code> parameter, when calling
 <a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.dump"><code>dump</code></a>/
 <a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.dumps"><code>dumps</code></a> or
 <a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.load"><code>load</code></a>/
-<a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.loads"><code>loads</code></a> instead.</p>
+<a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.loads"><code>loads</code></a>.</p>
 </div></td>
           <td>
-                <code>None</code>
+                <code>False</code>
           </td>
         </tr>
     </tbody>
   </table>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="marshmallow_generic.schema.GenericSchema.__setattr__" class="doc doc-heading">
+        <span class="doc doc-object-name doc-function-name">__setattr__</span>
+
+
+<a href="#marshmallow_generic.schema.GenericSchema.__setattr__" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="fm">__setattr__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Warns, when trying to set <code>many</code> to anything other than <code>False</code>.</p>
+<p>Otherwise the same the normal
+<a href="https://docs.python.org/3/reference/datamodel.html#object.__setattr__"><code>object.__setattr__</code></a>.</p>
 
   </div>
 
@@ -732,7 +772,9 @@ method-specific <code>many</code> parameter, when calling
   <div class="doc doc-contents ">
   
       <p>Serializes <strong><code>Model</code></strong> objects to native Python data types.</p>
-<p>Same as <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.dump"><code>marshmallow.Schema.dump</code></a> at runtime.</p>
+<p>Same as
+<a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.dump"><code>marshmallow.Schema.dump</code></a>
+at runtime.</p>
 <p>Annotations ensure that type checkers will infer the return type
 correctly based on the <code>many</code> argument, and also enforce the <code>obj</code>
 argument to be an a <code>list</code> of <strong><code>Model</code></strong> instances, if <code>many</code> is
@@ -842,7 +884,9 @@ value for <code>self.many</code> is used.</p></td>
   <div class="doc doc-contents ">
   
       <p>Unpacks <code>data</code> into the constructor of the specified <strong><code>Model</code></strong>.</p>
-<p>Registered as a <a class="autorefs autorefs-internal" href="../decorators/#marshmallow_generic.decorators.post_load"><code>@post_load</code></a> hook for the schema.</p>
+<p>Registered as a
+<a class="autorefs autorefs-internal" href="../decorators/#marshmallow_generic.decorators.post_load"><code>@post_load</code></a>
+hook for the schema.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You should probably not use this method directly. No parsing,
@@ -918,8 +962,10 @@ into the constructor of the specified <strong><code>Model</code></strong> class.
   <div class="doc doc-contents ">
   
       <p>Deserializes data to objects of the specified <strong><code>Model</code></strong> class.</p>
-<p>Same as <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.load"><code>marshmallow.Schema.load</code></a> at runtime, but data will always
-pass through the <a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.instantiate"><code>instantiate</code></a>
+<p>Same as
+<a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.load"><code>marshmallow.Schema.load</code></a> at
+runtime, but data will always pass through the
+<a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.instantiate"><code>instantiate</code></a>
 hook after deserialization.</p>
 <p>Annotations ensure that type checkers will infer the return type
 correctly based on the <strong><code>Model</code></strong> type argument of the class.</p>
@@ -962,10 +1008,11 @@ the value for <code>self.many</code> is used.</p></td>
                 <code><span title="typing.Union">Union</span>[bool, <span title="collections.abc.Sequence">Sequence</span>[str], set[str], None]</code>
           </td>
           <td><p>Whether to ignore missing fields and not require any
-fields declared. Propagates down to <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested"><code>Nested</code></a> fields as well. If its value
-is an iterable, only missing fields listed in that
-iterable will be ignored. Use dot delimiters to specify
-nested fields.</p></td>
+fields declared. Propagates down to
+<a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested"><code>Nested</code></a> fields as well. If
+its value is an iterable, only missing fields listed in
+that iterable will be ignored. Use dot delimiters to
+specify nested fields.</p></td>
           <td>
                 <code>None</code>
           </td>
@@ -1035,8 +1082,10 @@ If <code>None</code>, the value for <code>self.unknown</code> is used.</p></td>
   <div class="doc doc-contents ">
   
       <p>Deserializes data to objects of the specified <strong><code>Model</code></strong> class.</p>
-<p>Same as <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.loads"><code>marshmallow.Schema.loads</code></a> at runtime, but data will always
-pass through the <a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.instantiate"><code>instantiate</code></a>
+<p>Same as
+<a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.loads"><code>marshmallow.Schema.loads</code></a> at
+runtime, but data will always pass through the
+<a class="autorefs autorefs-internal" href="#marshmallow_generic.schema.GenericSchema.instantiate"><code>instantiate</code></a>
 hook after deserialization.</p>
 <p>Annotations ensure that type checkers will infer the return type
 correctly based on the <strong><code>Model</code></strong> type argument of the class.</p>
@@ -1079,10 +1128,11 @@ the value for <code>self.many</code> is used.</p></td>
                 <code><span title="typing.Union">Union</span>[bool, <span title="collections.abc.Sequence">Sequence</span>[str], set[str], None]</code>
           </td>
           <td><p>Whether to ignore missing fields and not require any
-fields declared. Propagates down to <a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested"><code>Nested</code></a> fields as well. If its value
-is an iterable, only missing fields listed in that
-iterable will be ignored. Use dot delimiters to specify
-nested fields.</p></td>
+fields declared. Propagates down to
+<a class="autorefs autorefs-external" href="https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html#marshmallow.fields.Nested"><code>Nested</code></a> fields as well. If
+its value is an iterable, only missing fields listed in
+that iterable will be ignored. Use dot delimiters to
+specify nested fields.</p></td>
           <td>
                 <code>None</code>
           </td>
