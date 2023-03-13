@@ -19,10 +19,10 @@ class GenericSchemaTestCase(TestCase):
             "dump_only": object(),
             "partial": object(),
             "unknown": object(),
-            "many": None,
+            "many": False,
         }
         schema.GenericSchema[Foo](**kwargs)
-        mock_super_init.assert_called_once_with(**kwargs | {"many": False})
+        mock_super_init.assert_called_once_with(**kwargs)
         mock_super_init.reset_mock()
         kwargs["many"] = True
         with self.assertWarns(UserWarning):

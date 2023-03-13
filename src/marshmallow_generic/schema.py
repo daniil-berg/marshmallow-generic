@@ -54,7 +54,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
         dump_only: Union[Sequence[str], set[str]] = (),
         partial: Union[bool, Sequence[str], set[str]] = False,
         unknown: Optional[str] = None,
-        many: Optional[bool] = None,
+        many: bool = False,  # usage discouraged
     ) -> None:
         """
         Emits a warning, if the `many` argument is not `None`.
@@ -90,22 +90,20 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
                 fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.
             many:
                 !!! warning
-                    Specifying this option schema-wide undermines the type
-                    safety that this class aims to provide and passing any
-                    value other than `None` will trigger a warning. Use the
-                    method-specific `many` parameter, when calling
+                    Changing this option schema-wide undermines the type
+                    safety that this class aims to provide. Passing `True`
+                    will therefore trigger a warning. You should instead use
+                    the method-specific `many` parameter, when calling
                     [`dump`][marshmallow_generic.GenericSchema.dump]/
                     [`dumps`][marshmallow_generic.GenericSchema.dumps] or
                     [`load`][marshmallow_generic.GenericSchema.load]/
-                    [`loads`][marshmallow_generic.GenericSchema.loads] instead.
+                    [`loads`][marshmallow_generic.GenericSchema.loads].
         """
-        if many is not None:
+        if many:
             warn(
                 "Setting `many` schema-wide breaks type safety. Use the the "
                 "`many` parameter of specific methods (like `load`) instead."
             )
-        else:
-            many = bool(many)
         super().__init__(
             only=only,
             exclude=exclude,
