@@ -65,6 +65,7 @@ version = {attr = "marshmallow_generic.__version__"}
 # Static type checking: #
 
 [tool.mypy]
+cache_dir = ".cache/mypy"
 files = [
     "src/",
     "tests/",
@@ -80,6 +81,7 @@ plugins = [
 # Unit test coverage: #
 
 [tool.coverage.run]
+data_file = ".cache/coverage"
 source = [
     "src/",
 ]
@@ -105,6 +107,7 @@ omit = [
 # Linting and style checking: #
 
 [tool.ruff]
+cache-dir = ".cache/ruff"
 select = [
     "E",   # pycodestyle errors
     "W",   # pycodestyle warnings
