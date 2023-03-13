@@ -10,19 +10,18 @@
 
 ---
 
-Extension for <a href="https://github.com/marshmallow-code/marshmallow" target="_blank">`marshmallow`</a> to make <a href="https://marshmallow.readthedocs.io/en/stable/quickstart.html#deserializing-to-objects" target="_blank">deserialization to objects</a> easier and improve type safety.
+Extension for <a href="https://github.com/marshmallow-code/marshmallow" target="_blank">**`marshmallow`**</a> to make <a href="https://marshmallow.readthedocs.io/en/stable/quickstart.html#deserializing-to-objects" target="_blank">deserialization to objects</a> easier and improve type safety.
 
 The main `GenericSchema` class extends <a href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema" target="_blank">`marshmallow.Schema`</a> making it **generic** in terms of the class that data should be deserialized to, when calling <a href="https://marshmallow.readthedocs.io/en/stable/marshmallow.schema.html#marshmallow.schema.Schema.load" target="_blank">`load`/`loads`</a>.
 
 With `GenericSchema` there is no need to explicitly write `post_load` hooks to initialize the object anymore. 🎉
 
-If the "model" class is (for example) `User`, it just needs to be passed as the type argument, when subclassing `GenericSchema`. Depending on whether `many` is `True` or not, the output of the `load`/`loads` method will then be automatically inferred as either `User` or `list[User]` by any competent type checker. ✨
+If the "model" class is (for example) `User`, it just needs to be passed as the type argument, when subclassing `GenericSchema`. The output of the `load`/`loads` method will then be automatically inferred as either `User` or `list[User]` (depending on whether `many` is `True` or not) by any competent type checker. ✨
 
 ## Usage Example
 
 ```python
-from marshmallow import fields
-from marshmallow_generic import GenericSchema
+from marshmallow_generic import GenericSchema, fields
 
 
 class User:
