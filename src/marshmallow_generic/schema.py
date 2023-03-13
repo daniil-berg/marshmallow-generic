@@ -57,7 +57,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
         many: bool = False,  # usage discouraged
     ) -> None:
         """
-        Emits a warning, if the `many` argument is not `None`.
+        Emits a warning, if the `many` argument is not `False`.
 
         Otherwise the same as in [`marshmallow.Schema`][marshmallow.Schema].
 
@@ -72,19 +72,20 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
                 it is not used. Nested fields can be represented with dot
                 delimiters.
             context:
-                Optional context passed to [`Method`]
-                [marshmallow.fields.Method] and [`Function`]
-                [marshmallow.fields.Function] fields.
+                Optional context passed to
+                [`Method`][marshmallow.fields.Method] and
+                [`Function`][marshmallow.fields.Function] fields.
             load_only:
                 Fields to skip during serialization (write-only fields)
             dump_only:
                 Fields to skip during deserialization (read-only fields)
             partial:
                 Whether to ignore missing fields and not require any fields
-                declared. Propagates down to [`Nested`]
-                [marshmallow.fields.Nested] fields as well. If its value is an
-                iterable, only missing fields listed in that iterable will be
-                ignored. Use dot delimiters to specify nested fields.
+                declared. Propagates down to
+                [`Nested`][marshmallow.fields.Nested] fields as well. If its
+                value is an iterable, only missing fields listed in that
+                iterable will be ignored. Use dot delimiters to specify nested
+                fields.
             unknown:
                 Whether to exclude, include, or raise an error for unknown
                 fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.
@@ -99,11 +100,6 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
                     [`load`][marshmallow_generic.GenericSchema.load]/
                     [`loads`][marshmallow_generic.GenericSchema.loads].
         """
-        if many:
-            warn(
-                "Setting `many` schema-wide breaks type safety. Use the the "
-                "`many` parameter of specific methods (like `load`) instead."
-            )
         super().__init__(
             only=only,
             exclude=exclude,
@@ -115,13 +111,28 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             unknown=unknown,
         )
 
+    def __setattr__(self, name: str, value: Any) -> None:
+        """
+        Warns, when trying to set `many` to anything other than `False`.
+
+        Otherwise the same the normal
+        [`object.__setattr__`](https://docs.python.org/3/reference/datamodel.html#object.__setattr__).
+        """
+        if name == "many" and value is not False:
+            warn(
+                "Changing `many` schema-wide breaks type safety. Use the the "
+                "`many` parameter of specific methods (like `load`) instead."
+            )
+        super().__setattr__(name, value)
+
     @post_load
     def instantiate(self, data: dict[str, Any], **_kwargs: Any) -> Model:
         """
         Unpacks `data` into the constructor of the specified **`Model`**.
 
-        Registered as a [`@post_load`]
-        [marshmallow_generic.decorators.post_load] hook for the schema.
+        Registered as a
+        [`@post_load`][marshmallow_generic.decorators.post_load]
+        hook for the schema.
 
         !!! warning
             You should probably not use this method directly. No parsing,
@@ -167,8 +178,9 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             """
             Serializes **`Model`** objects to native Python data types.
 
-            Same as [`marshmallow.Schema.dump`]
-            [marshmallow.schema.Schema.dump] at runtime.
+            Same as
+            [`marshmallow.Schema.dump`][marshmallow.schema.Schema.dump]
+            at runtime.
 
             Annotations ensure that type checkers will infer the return type
             correctly based on the `many` argument, and also enforce the `obj`
@@ -252,10 +264,10 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             """
             Deserializes data to objects of the specified **`Model`** class.
 
-            Same as [`marshmallow.Schema.load`]
-            [marshmallow.schema.Schema.load] at runtime, but data will always
-            pass through the [`instantiate`]
-            [marshmallow_generic.schema.GenericSchema.instantiate]
+            Same as
+            [`marshmallow.Schema.load`][marshmallow.schema.Schema.load] at
+            runtime, but data will always pass through the
+            [`instantiate`][marshmallow_generic.schema.GenericSchema.instantiate]
             hook after deserialization.
 
             Annotations ensure that type checkers will infer the return type
@@ -269,11 +281,11 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
                     the value for `self.many` is used.
                 partial:
                     Whether to ignore missing fields and not require any
-                    fields declared. Propagates down to [`Nested`]
-                    [marshmallow.fields.Nested] fields as well. If its value
-                    is an iterable, only missing fields listed in that
-                    iterable will be ignored. Use dot delimiters to specify
-                    nested fields.
+                    fields declared. Propagates down to
+                    [`Nested`][marshmallow.fields.Nested] fields as well. If
+                    its value is an iterable, only missing fields listed in
+                    that iterable will be ignored. Use dot delimiters to
+                    specify nested fields.
                 unknown:
                     Whether to exclude, include, or raise an error for unknown
                     fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.
@@ -321,10 +333,10 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             """
             Deserializes data to objects of the specified **`Model`** class.
 
-            Same as [`marshmallow.Schema.loads`]
-            [marshmallow.schema.Schema.loads] at runtime, but data will always
-            pass through the [`instantiate`]
-            [marshmallow_generic.schema.GenericSchema.instantiate]
+            Same as
+            [`marshmallow.Schema.loads`][marshmallow.schema.Schema.loads] at
+            runtime, but data will always pass through the
+            [`instantiate`][marshmallow_generic.schema.GenericSchema.instantiate]
             hook after deserialization.
 
             Annotations ensure that type checkers will infer the return type
@@ -338,11 +350,11 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
                     the value for `self.many` is used.
                 partial:
                     Whether to ignore missing fields and not require any
-                    fields declared. Propagates down to [`Nested`]
-                    [marshmallow.fields.Nested] fields as well. If its value
-                    is an iterable, only missing fields listed in that
-                    iterable will be ignored. Use dot delimiters to specify
-                    nested fields.
+                    fields declared. Propagates down to
+                    [`Nested`][marshmallow.fields.Nested] fields as well. If
+                    its value is an iterable, only missing fields listed in
+                    that iterable will be ignored. Use dot delimiters to
+                    specify nested fields.
                 unknown:
                     Whether to exclude, include, or raise an error for unknown
                     fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.

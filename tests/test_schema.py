@@ -19,15 +19,19 @@ class GenericSchemaTestCase(TestCase):
             "dump_only": object(),
             "partial": object(),
             "unknown": object(),
-            "many": False,
+            "many": object(),
         }
         schema.GenericSchema[Foo](**kwargs)
         mock_super_init.assert_called_once_with(**kwargs)
-        mock_super_init.reset_mock()
-        kwargs["many"] = True
+
+    def test___setattr__(self) -> None:
+        class Foo:
+            pass
+
+        obj = schema.GenericSchema[Foo]()
         with self.assertWarns(UserWarning):
-            schema.GenericSchema[Foo](**kwargs)
-        mock_super_init.assert_called_once_with(**kwargs)
+            obj.many = new = MagicMock()
+        self.assertIs(new, obj.many)
 
     @patch.object(_util.GenericInsightMixin, "_get_type_arg")
     def test_instantiate(self, mock__get_type_arg: MagicMock) -> None:
