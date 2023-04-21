@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
-# Runs type checker and linters.
+# Runs various linters.
 
-# Ensure that we return to the current working directory
-# and exit the script immediately in case of an error:
-trap "cd $(realpath ${PWD}); exit 1" ERR
-# Change into project root directory:
-cd "$(dirname $(dirname $(realpath $0)))"
-
-echo 'Performing type checks...'
-mypy
-echo
+source "$(dirname $(realpath $0))/util.sh"
 
 echo 'Linting source and test files...'
+
+echo '  isort - consistent imports'
 isort src/ tests/ --check-only
+
+echo '  ruff - extensive linting'
 ruff src/ tests/
-black src/ tests/ --check
-echo -e 'No issues found.'
+
+echo '  black - consistent style'
+run_and_capture black src/ tests/ --check
+
+echo -e "${bold_green}No issues found${color_reset}\n"
