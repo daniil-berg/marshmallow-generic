@@ -16,6 +16,11 @@ from .decorators import post_load
 
 Model = TypeVar("Model")
 
+MANY_SCHEMA_UNSAFE = (
+    "Changing `many` schema-wide breaks type safety. "
+    "Use the the `many` parameter of specific methods (like `load`) instead."
+)
+
 
 class GenericSchema(GenericInsightMixin1[Model], Schema):
     """
@@ -100,6 +105,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
                     [`load`][marshmallow_generic.GenericSchema.load]/
                     [`loads`][marshmallow_generic.GenericSchema.loads].
         """
+        self._pre_init = True
         super().__init__(
             only=only,
             exclude=exclude,
@@ -110,6 +116,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             partial=partial,
             unknown=unknown,
         )
+        self._pre_init = False
 
     def __setattr__(self, name: str, value: Any) -> None:
         """
@@ -119,10 +126,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
         [`object.__setattr__`](https://docs.python.org/3/reference/datamodel.html#object.__setattr__).
         """
         if name == "many" and value is not False:
-            warn(
-                "Changing `many` schema-wide breaks type safety. Use the the "
-                "`many` parameter of specific methods (like `load`) instead."
-            )
+            warn(MANY_SCHEMA_UNSAFE, stacklevel=4 if self._pre_init else 2)
         super().__setattr__(name, value)
 
     @post_load
