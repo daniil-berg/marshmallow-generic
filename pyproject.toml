@@ -52,14 +52,14 @@ dev = [
 ]
 
 [project.urls]
-repository = "https://github.com/daniil-berg/marshmallow-generic"
-bug_tracker = "https://github.com/daniil-berg/marshmallow-generic/issues"
-documentation = "http://daniil-berg.github.io/marshmallow-generic"
+"Repository" = "https://github.com/daniil-berg/marshmallow-generic"
+"Issue Tracker" = "https://github.com/daniil-berg/marshmallow-generic/issues"
+"Documentation" = "http://daniil-berg.github.io/marshmallow-generic"
 
 [tool.setuptools.dynamic]
 dependencies = { file = "requirements/common.txt" }
-readme = { file = ["README.md"] }
-version = {attr = "marshmallow_generic.__version__"}
+readme = { file = ["README.md"], content-type = "text/markdown" }
+version = { attr = "marshmallow_generic.__version__" }
 
 #########################
 # Static type checking: #
