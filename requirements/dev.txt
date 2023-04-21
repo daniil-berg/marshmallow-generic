@@ -1,9 +1,9 @@
 -r common.txt
-black
-build
-coverage[toml]
-isort
-mkdocs-material
-mkdocstrings[python]
-mypy
-ruff
+black==23.3.0
+build==0.10.0
+coverage[toml]==7.2.3
+isort==5.12.0
+mkdocs-material==9.1.6
+mkdocstrings[python]==0.21.2
+mypy==1.2.0
+ruff==0.0.262
