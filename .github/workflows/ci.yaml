@@ -1,4 +1,4 @@
-name: CI - Tests & Checks
+name: CI
 
 on:
   push:
@@ -6,65 +6,18 @@ on:
       - master
 
 jobs:
-  unit-tests:
-    name: Execute unit tests (Python ${{ matrix.python-version }})
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version:
-        - '3.9'
-        - '3.10'
-        - '3.11'
-    steps:
-    - uses: actions/checkout@v3
-
-    - uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-        cache-dependency-path: 'requirements/dev.txt'
-
-    - name: Upgrade pip
-      run: pip install -U pip
-
-    - name: Install marshmallow-generic
-      run: pip install -e '.[dev]'
-
-    - name: Run unit tests for Python ${{ matrix.python-version }}
-      if: ${{ matrix.python-version != '3.11' }}
-      run: python -m tests
-
-    - name: Run unit test coverage script for Python 3.11 and save total percentage
-      if: ${{ matrix.python-version == '3.11' }}
-      run: |
-        total=$(./scripts/test.sh)
-        [[ $? -eq 0 ]] && echo "coverage=${total}" >> $GITHUB_ENV
-    outputs:
-      coverage: ${{ env.coverage }}
-
-  lint:
-    name: Run type checker and linters (Python ${{ matrix.python-version }})
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version:
-        - '3.9'
-        - '3.10'
-        - '3.11'
-    steps:
-    - uses: actions/checkout@v3
-
-    - uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-        cache-dependency-path: 'requirements/dev.txt'
-
-    - name: Upgrade pip
-      run: pip install -U pip
-
-    - name: Install dependencies
-      run: pip install -Ur requirements/dev.txt
-
-    - name: Run checks
-      run: bash scripts/lint.sh
+  test-and-check:
+    name: Tests and checks
+    uses: daniil-berg/reusable-workflows/.github/workflows/python-test.yaml@v0.0.1
+    with:
+      versions: '["3.9", "3.10", "3.11"]'
+      cache: pip
+      cache-dependency-path: pyproject.toml
+      unittest-command: 'scripts/test.sh'
+      coverage-command: 'scripts/cov.sh'
+      unittest-requirements: "-e '.[dev]'"
+      typecheck-command: 'scripts/typecheck.sh'
+      typecheck-requirements: '-Ur requirements/dev.txt'
+      typecheck-all-versions: true
+      lint-command: 'scripts/lint.sh'
+      lint-requirements: '-Ur requirements/dev.txt'
