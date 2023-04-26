@@ -2,17 +2,15 @@ name: CI
 
 on:
   push:
-    branches:
-      - master
+    branches: master
+    tags: 'v*.*.*'
 
 jobs:
-  test-and-check:
-    name: Tests and checks
-    uses: daniil-berg/reusable-workflows/.github/workflows/python-test.yaml@v0.0.1
+  test:
+    name: Test
+    uses: daniil-berg/reusable-workflows/.github/workflows/python-test.yaml@v0.2.1
     with:
       versions: '["3.9", "3.10", "3.11"]'
-      cache: pip
-      cache-dependency-path: pyproject.toml
       unittest-command: 'scripts/test.sh'
       coverage-command: 'scripts/cov.sh'
       unittest-requirements: "-e '.[dev]'"
@@ -21,3 +19,16 @@ jobs:
       typecheck-all-versions: true
       lint-command: 'scripts/lint.sh'
       lint-requirements: '-Ur requirements/dev.txt'
+
+  release:
+    name: Release
+    if: ${{ github.ref_type == 'tag' }}
+    needs: test
+    uses: daniil-berg/reusable-workflows/.github/workflows/python-release.yaml@v0.2.1
+    with:
+      git-ref: ${{ github.ref_name }}
+    secrets:
+      release-token: ${{ secrets.TOKEN_GITHUB_CREATE_RELEASE }}
+      publish-token: ${{ secrets.TOKEN_PYPI_PROJECT }}
+    permissions:
+      contents: write
