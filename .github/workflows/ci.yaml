@@ -2,13 +2,13 @@ name: CI
 
 on:
   push:
-    branches: master
-    tags: 'v*.*.*'
+    branches: [master]
+    tags: ['v*.*.*']
 
 jobs:
   test:
     name: Test
-    uses: daniil-berg/reusable-workflows/.github/workflows/python-test.yaml@v0.2.1
+    uses: daniil-berg/reusable-workflows/.github/workflows/python-test.yaml@v0.2.2
     with:
       versions: '["3.9", "3.10", "3.11"]'
       unittest-command: 'scripts/test.sh'
@@ -24,7 +24,7 @@ jobs:
     name: Release
     if: ${{ github.ref_type == 'tag' }}
     needs: test
-    uses: daniil-berg/reusable-workflows/.github/workflows/python-release.yaml@v0.2.1
+    uses: daniil-berg/reusable-workflows/.github/workflows/python-release.yaml@v0.2.2
     with:
       git-ref: ${{ github.ref_name }}
     secrets:
