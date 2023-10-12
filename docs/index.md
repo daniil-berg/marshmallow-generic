@@ -30,7 +30,7 @@ class User:
         self.email = email
 
     def __repr__(self) -> str:
-        return "<User(name={self.name!r})>".format(self=self)
+        return f"<User(name={self.name})>"
 
 ...
 
@@ -55,15 +55,15 @@ print(multiple_users)  # [<User(name='Monty')>, <User(name='Ronnie')>]
 Adding `reveal_type(single_user)` and `reveal_type(multiple_users)` at the bottom and running that code through <a href="https://mypy.readthedocs.io/en/stable/" target="_blank">`mypy`</a> would yield the following output:
 
 ```
-# note: Revealed type is "User"
-# note: Revealed type is "builtins.list[User]"
+note: Revealed type is "User"
+note: Revealed type is "list[User]"
 ```
 
 With the regular `marshmallow.Schema`, the output of `mypy` would instead be this:
 
 ```
-# note: Revealed type is "Any"
-# note: Revealed type is "Any"
+note: Revealed type is "Any"
+note: Revealed type is "Any"
 ```
 
 This also means your IDE will be able to infer the types and thus provide useful auto-suggestions for the loaded objects. 👨‍💻
