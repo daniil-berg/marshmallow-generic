@@ -66,3 +66,7 @@ def post_load(
         (Callable[[Callable[P, R]], Callable[P, R]]): if `fn` is `None`
     """
     return _post_load(fn, pass_many=pass_many, pass_original=pass_original)
+
+
+# Keeping the signature as close as possible to the original decorator.
+# ruff: noqa: FBT001, FBT002

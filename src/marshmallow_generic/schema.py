@@ -49,7 +49,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
     ```
     """
 
-    def __init__(
+    def __init__(  # noqa: PLR0913
         self,
         *,
         only: Union[Sequence[str], set[str], None] = None,

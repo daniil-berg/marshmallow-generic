@@ -85,9 +85,9 @@ class GenericInsightMixin(Generic[_T0, _T1, _T2, _T3, _T4]):
         elif idx == 4:  # noqa: PLR2004
             type_ = cls._type_arg_4
         else:
-            raise ValueError("Only 5 type parameters available")
+            raise ValueError("Only 5 type parameters available")  # noqa: TRY003
         if type_ is None:
-            raise AttributeError(
+            raise AttributeError(  # noqa: TRY003
                 f"{cls.__name__} is generic; type argument {idx} unspecified"
             )
         return type_
