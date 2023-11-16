@@ -4,6 +4,20 @@ on:
   push:
     branches: [master]
     tags: ['v*.*.*']
+    paths:
+      - '**.py'
+      - 'requirements/*.txt'
+      - 'scripts/*'
+      - 'pyproject.toml'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    paths:
+      - '**.py'
+      - 'requirements/*.txt'
+      - 'scripts/*'
+      - 'pyproject.toml'
 
 jobs:
   test:
