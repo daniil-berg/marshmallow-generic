@@ -1,0 +1,33 @@
+version: 2
+updates:
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: 👷
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+      time: '09:00'
+      timezone: Europe/Berlin
+    commit-message:
+      prefix: ⬆️
+    groups:
+      dev-dependencies:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+        # Exclude non-dev dependencies.
+        exclude-patterns:
+          - marshmallow
+    ignore:
+      - dependency-name: '*'
+        update-types: [version-update:semver-major]
+    versioning-strategy: increase
