@@ -6,6 +6,7 @@ on:
     tags: ['v*.*.*']
     paths:
       - '**.py'
+      - '.github/workflows/*'
       - 'requirements/*.txt'
       - 'scripts/*'
       - 'pyproject.toml'
@@ -15,6 +16,7 @@ on:
       - synchronize
     paths:
       - '**.py'
+      - '.github/workflows/*'
       - 'requirements/*.txt'
       - 'scripts/*'
       - 'pyproject.toml'
