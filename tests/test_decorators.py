@@ -13,16 +13,16 @@ class DecoratorsTestCase(TestCase):
         def test_function(x: int) -> str:
             return str(x)
 
-        pass_many, pass_original = MagicMock(), MagicMock()
+        pass_collection, pass_original = MagicMock(), MagicMock()
         # Explicit annotation to possibly catch mypy errors:
         output: Callable[[int], str] = decorators.post_load(
             test_function,
-            pass_many=pass_many,
+            pass_collection=pass_collection,
             pass_original=pass_original,
         )
         self.assertIs(expected_output, output)
         mock_original_post_load.assert_called_once_with(
             test_function,
-            pass_many=pass_many,
+            pass_collection=pass_collection,
             pass_original=pass_original,
         )

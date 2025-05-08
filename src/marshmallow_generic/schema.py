@@ -9,7 +9,7 @@ from collections.abc import Iterable, Mapping, Sequence
 from typing import TYPE_CHECKING, Any, Literal, Optional, TypeVar, Union, overload
 from warnings import warn
 
-from marshmallow import Schema
+from marshmallow import Schema, types
 
 from ._util import GenericInsightMixin1
 from .decorators import post_load
@@ -52,14 +52,13 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
     def __init__(  # noqa: PLR0913
         self,
         *,
-        only: Union[Sequence[str], set[str], None] = None,
-        exclude: Union[Sequence[str], set[str]] = (),
-        context: Union[dict[str, Any], None] = None,
-        load_only: Union[Sequence[str], set[str]] = (),
-        dump_only: Union[Sequence[str], set[str]] = (),
-        partial: Union[bool, Sequence[str], set[str]] = False,
-        unknown: Optional[str] = None,
-        many: bool = False,  # usage discouraged
+        only: types.StrSequenceOrSet | None = None,
+        exclude: types.StrSequenceOrSet = (),
+        many: bool | None = None,
+        load_only: types.StrSequenceOrSet = (),
+        dump_only: types.StrSequenceOrSet = (),
+        partial: bool | types.StrSequenceOrSet | None = None,
+        unknown: types.UnknownOption | None = None,
     ) -> None:
         """
         Emits a warning, if the `many` argument is not `False`.
@@ -76,10 +75,6 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
                 the Schema. If a field appears in both `only` and `exclude`,
                 it is not used. Nested fields can be represented with dot
                 delimiters.
-            context:
-                Optional context passed to
-                [`Method`][marshmallow.fields.Method] and
-                [`Function`][marshmallow.fields.Function] fields.
             load_only:
                 Fields to skip during serialization (write-only fields)
             dump_only:
@@ -110,7 +105,6 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             only=only,
             exclude=exclude,
             many=many,
-            context=context,
             load_only=load_only,
             dump_only=dump_only,
             partial=partial,

@@ -17,7 +17,7 @@ _P = ParamSpec("_P")
 @overload
 def post_load(
     fn: Callable[_P, _R],
-    pass_many: bool = False,
+    pass_collection: bool = False,
     pass_original: bool = False,
 ) -> Callable[_P, _R]:
     ...
@@ -26,7 +26,7 @@ def post_load(
 @overload
 def post_load(
     fn: None = None,
-    pass_many: bool = False,
+    pass_collection: bool = False,
     pass_original: bool = False,
 ) -> Callable[[Callable[_P, _R]], Callable[_P, _R]]:
     ...
@@ -34,7 +34,7 @@ def post_load(
 
 def post_load(
     fn: Optional[Callable[..., Any]] = None,
-    pass_many: bool = False,
+    pass_collection: bool = False,
     pass_original: bool = False,
 ) -> Callable[..., Any]:
     """
@@ -55,7 +55,7 @@ def post_load(
             The function to decorate or `None`; if a function is supplied,
             a decorated version of it is returned; if `None` the decorator
             is returned with its other arguments already bound.
-        pass_many:
+        pass_collection:
             If `True`, the raw data (which may be a collection) is passed
         pass_original:
             If `True`, the original data (before deserializing) will be passed
@@ -65,7 +65,7 @@ def post_load(
         (Callable[P, R]): if `fn` is passed a function
         (Callable[[Callable[P, R]], Callable[P, R]]): if `fn` is `None`
     """
-    return _post_load(fn, pass_many=pass_many, pass_original=pass_original)
+    return _post_load(fn, pass_collection=pass_collection, pass_original=pass_original)
 
 
 # Keeping the signature as close as possible to the original decorator.

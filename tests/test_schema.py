@@ -14,7 +14,6 @@ class GenericSchemaTestCase(TestCase):
         kwargs: dict[str, Any] = {
             "only": object(),
             "exclude": object(),
-            "context": object(),
             "load_only": object(),
             "dump_only": object(),
             "partial": object(),
