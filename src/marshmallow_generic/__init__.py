@@ -51,7 +51,8 @@ from marshmallow.decorators import (  # `post_load` overloaded
 )
 from marshmallow.exceptions import ValidationError
 from marshmallow.schema import Schema, SchemaOpts
-from marshmallow.utils import EXCLUDE, INCLUDE, RAISE, missing, pprint
+from marshmallow.constants import EXCLUDE, INCLUDE, RAISE, missing
+from pprint import pprint
 
 from marshmallow_generic.decorators import post_load
 from marshmallow_generic.schema import GenericSchema
