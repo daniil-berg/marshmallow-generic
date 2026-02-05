@@ -5,8 +5,7 @@ Implements decorators as generic in terms of the decorated method types.
 """
 
 from collections.abc import Callable
-from typing import Any, Optional, TypeVar, overload
-from typing_extensions import ParamSpec
+from typing import Any, ParamSpec, TypeVar, overload
 
 from marshmallow.decorators import post_load as _post_load
 
@@ -33,7 +32,7 @@ def post_load(
 
 
 def post_load(
-    fn: Optional[Callable[..., Any]] = None,
+    fn: Callable[..., Any] | None = None,
     pass_collection: bool = False,
     pass_original: bool = False,
 ) -> Callable[..., Any]:
@@ -51,7 +50,7 @@ def post_load(
     call.
 
     Args:
-        fn (Optional[Callable[P, R]]):
+        fn:
             The function to decorate or `None`; if a function is supplied,
             a decorated version of it is returned; if `None` the decorator
             is returned with its other arguments already bound.

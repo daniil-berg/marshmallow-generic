@@ -5,10 +5,11 @@ For details about the inherited methods and attributes, see the official
 documentation of [`marshmallow.Schema`][marshmallow.Schema].
 """
 
-from typing import TYPE_CHECKING, Any, Literal, Optional, TypeVar, Union, overload
+from typing import TYPE_CHECKING, Any, Literal, TypeVar, overload
 from warnings import warn
 
-from marshmallow import Schema, types
+from marshmallow import Schema
+from marshmallow.types import StrSequenceOrSet, UnknownOption
 
 from ._util import GenericInsightMixin1
 from .decorators import post_load
@@ -54,12 +55,12 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
     def __init__(  # noqa: PLR0913
         self,
         *,
-        only: types.StrSequenceOrSet | None = None,
-        exclude: types.StrSequenceOrSet = (),
-        load_only: types.StrSequenceOrSet = (),
-        dump_only: types.StrSequenceOrSet = (),
-        partial: bool | types.StrSequenceOrSet | None = None,
-        unknown: types.UnknownOption | None = None,
+        only: StrSequenceOrSet | None = None,
+        exclude: StrSequenceOrSet = (),
+        load_only: StrSequenceOrSet = (),
+        dump_only: StrSequenceOrSet = (),
+        partial: bool | StrSequenceOrSet | None = None,
+        unknown: UnknownOption | None = None,
         many: bool | None = None,
     ) -> None:
         """
@@ -165,16 +166,16 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             self,
             obj: Model,
             *,
-            many: Optional[Literal[False]] = None,
+            many: Literal[False] | None = None,
         ) -> dict[str, Any]:
             ...
 
         def dump(
             self,
-            obj: Union[Model, Iterable[Model]],
+            obj: Model | Iterable[Model],
             *,
-            many: Optional[bool] = None,
-        ) -> Union[dict[str, Any], list[dict[str, Any]]]:
+            many: bool | None = None,
+        ) -> dict[str, Any] | list[dict[str, Any]]:
             """
             Serializes **`Model`** objects to native Python data types.
 
@@ -216,16 +217,16 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             self,
             obj: Model,
             *args: Any,
-            many: Optional[Literal[False]] = None,
+            many: Literal[False] | None = None,
             **kwargs: Any,
         ) -> str:
             ...
 
         def dumps(
             self,
-            obj: Union[Model, Iterable[Model]],
+            obj: Model | Iterable[Model],
             *args: Any,
-            many: Optional[bool] = None,
+            many: bool | None = None,
             **kwargs: Any,
         ) -> str:
             """Same as [`dump`][marshmallow_generic.GenericSchema.dump], but returns a JSON-encoded string."""
@@ -234,33 +235,33 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
         @overload  # type: ignore[override]
         def load(
             self,
-            data: Union[Mapping[str, Any], Iterable[Mapping[str, Any]]],
+            data: Mapping[str, Any] | Iterable[Mapping[str, Any]],
             *,
             many: Literal[True],
-            partial: Union[bool, Sequence[str], set[str], None] = None,
-            unknown: Optional[str] = None,
+            partial: bool | Sequence[str] | set[str] | None = None,
+            unknown: str | None = None,
         ) -> list[Model]:
             ...
 
         @overload
         def load(
             self,
-            data: Union[Mapping[str, Any], Iterable[Mapping[str, Any]]],
+            data: Mapping[str, Any] | Iterable[Mapping[str, Any]],
             *,
-            many: Optional[Literal[False]] = None,
-            partial: Union[bool, Sequence[str], set[str], None] = None,
-            unknown: Optional[str] = None,
+            many: Literal[False] | None = None,
+            partial: bool | Sequence[str] | set[str] | None = None,
+            unknown: str | None = None,
         ) -> Model:
             ...
 
         def load(
             self,
-            data: Union[Mapping[str, Any], Iterable[Mapping[str, Any]]],
+            data: Mapping[str, Any] | Iterable[Mapping[str, Any]],
             *,
-            many: Optional[bool] = None,
-            partial: Union[bool, Sequence[str], set[str], None] = None,
-            unknown: Optional[str] = None,
-        ) -> Union[list[Model], Model]:
+            many: bool | None = None,
+            partial: bool | Sequence[str] | set[str] | None = None,
+            unknown: str | None = None,
+        ) -> list[Model] | Model:
             """
             Deserializes data to objects of the specified **`Model`** class.
 
@@ -303,8 +304,8 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             json_data: str,
             *,
             many: Literal[True],
-            partial: Union[bool, Sequence[str], set[str], None] = None,
-            unknown: Optional[str] = None,
+            partial: bool | Sequence[str] | set[str] | None = None,
+            unknown: str | None = None,
             **kwargs: Any,
         ) -> list[Model]:
             ...
@@ -314,9 +315,9 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             self,
             json_data: str,
             *,
-            many: Optional[Literal[False]] = None,
-            partial: Union[bool, Sequence[str], set[str], None] = None,
-            unknown: Optional[str] = None,
+            many: Literal[False] | None = None,
+            partial: bool | Sequence[str] | set[str] | None = None,
+            unknown: str | None = None,
             **kwargs: Any,
         ) -> Model:
             ...
@@ -325,11 +326,11 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             self,
             json_data: str,
             *,
-            many: Optional[bool] = None,
-            partial: Union[bool, Sequence[str], set[str], None] = None,
-            unknown: Optional[str] = None,
+            many: bool | None = None,
+            partial: bool | Sequence[str] | set[str] | None = None,
+            unknown: str | None = None,
             **kwargs: Any,
-        ) -> Union[list[Model], Model]:
+        ) -> list[Model] | Model:
             """
             Deserializes data to objects of the specified **`Model`** class.
 

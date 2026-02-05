@@ -2,9 +2,7 @@ from typing import (
     Any,
     Generic,
     Literal,
-    Optional,
     TypeVar,
-    Union,
     get_args,
     get_origin,
     overload,
@@ -18,11 +16,11 @@ _T4 = TypeVar("_T4")
 
 
 class GenericInsightMixin(Generic[_T0, _T1, _T2, _T3, _T4]):
-    _type_arg_0: Optional[type[_T0]] = None
-    _type_arg_1: Optional[type[_T1]] = None
-    _type_arg_2: Optional[type[_T2]] = None
-    _type_arg_3: Optional[type[_T3]] = None
-    _type_arg_4: Optional[type[_T4]] = None
+    _type_arg_0: type[_T0] | None = None
+    _type_arg_1: type[_T1] | None = None
+    _type_arg_2: type[_T2] | None = None
+    _type_arg_3: type[_T3] | None = None
+    _type_arg_4: type[_T4] | None = None
 
     @classmethod
     def __init_subclass__(cls, **kwargs: Any) -> None:
@@ -72,25 +70,17 @@ class GenericInsightMixin(Generic[_T0, _T1, _T2, _T3, _T4]):
     def _get_type_arg(
         cls,
         idx: Literal[0, 1, 2, 3, 4],
-    ) -> Union[type[_T0], type[_T1], type[_T2], type[_T3], type[_T4]]:
+    ) -> type[_T0] | type[_T1] | type[_T2] | type[_T3] | type[_T4]:
         """Returns the type argument of the class (if specified)."""
-        if idx == 0:
-            type_ = cls._type_arg_0
-        elif idx == 1:
-            type_ = cls._type_arg_1
-        elif idx == 2:  # noqa: PLR2004
-            type_ = cls._type_arg_2
-        elif idx == 3:  # noqa: PLR2004
-            type_ = cls._type_arg_3
-        elif idx == 4:  # noqa: PLR2004
-            type_ = cls._type_arg_4
-        else:
-            raise ValueError("Only 5 type parameters available")  # noqa: TRY003
+        try:
+            type_ = getattr(cls, f"_type_arg_{idx}")
+        except AttributeError:
+            raise ValueError("Only 5 type parameters available") from None  # noqa: TRY003
         if type_ is None:
             raise AttributeError(  # noqa: TRY003
                 f"{cls.__name__} is generic; type argument {idx} unspecified"
             )
-        return type_
+        return type_  # type: ignore[no-any-return]
 
 
 class GenericInsightMixin1(GenericInsightMixin[_T0, None, None, None, None]):
