@@ -43,28 +43,23 @@ class GenericInsightMixin(Generic[_T0, _T1, _T2, _T3, _T4]):
 
     @classmethod
     @overload
-    def _get_type_arg(cls, idx: Literal[0]) -> type[_T0]:
-        ...
+    def _get_type_arg(cls, idx: Literal[0]) -> type[_T0]: ...
 
     @classmethod
     @overload
-    def _get_type_arg(cls, idx: Literal[1]) -> type[_T1]:
-        ...
+    def _get_type_arg(cls, idx: Literal[1]) -> type[_T1]: ...
 
     @classmethod
     @overload
-    def _get_type_arg(cls, idx: Literal[2]) -> type[_T2]:
-        ...
+    def _get_type_arg(cls, idx: Literal[2]) -> type[_T2]: ...
 
     @classmethod
     @overload
-    def _get_type_arg(cls, idx: Literal[3]) -> type[_T3]:
-        ...
+    def _get_type_arg(cls, idx: Literal[3]) -> type[_T3]: ...
 
     @classmethod
     @overload
-    def _get_type_arg(cls, idx: Literal[4]) -> type[_T4]:
-        ...
+    def _get_type_arg(cls, idx: Literal[4]) -> type[_T4]: ...
 
     @classmethod
     def _get_type_arg(

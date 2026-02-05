@@ -28,7 +28,9 @@ class GenericInsightMixinTestCase(TestCase):
         class Bar(Generic[t]):
             pass
 
-        class TestCls(Bar[str], _util.GenericInsightMixin[t, None, int, str, bool]):
+        class TestCls(
+            Bar[str], _util.GenericInsightMixin[t, None, int, str, bool]
+        ):
             pass
 
         self.assertIsNone(TestCls._type_arg_0)  # type: ignore[misc]

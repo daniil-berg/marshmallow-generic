@@ -18,8 +18,7 @@ def post_load(
     fn: Callable[_P, _R],
     pass_collection: bool = False,
     pass_original: bool = False,
-) -> Callable[_P, _R]:
-    ...
+) -> Callable[_P, _R]: ...
 
 
 @overload
@@ -27,8 +26,7 @@ def post_load(
     fn: None = None,
     pass_collection: bool = False,
     pass_original: bool = False,
-) -> Callable[[Callable[_P, _R]], Callable[_P, _R]]:
-    ...
+) -> Callable[[Callable[_P, _R]], Callable[_P, _R]]: ...
 
 
 def post_load(
@@ -64,7 +62,9 @@ def post_load(
         (Callable[P, R]): if `fn` is passed a function
         (Callable[[Callable[P, R]], Callable[P, R]]): if `fn` is `None`
     """
-    return _post_load(fn, pass_collection=pass_collection, pass_original=pass_original)
+    return _post_load(
+        fn, pass_collection=pass_collection, pass_original=pass_original
+    )
 
 
 # Keeping the signature as close as possible to the original decorator.

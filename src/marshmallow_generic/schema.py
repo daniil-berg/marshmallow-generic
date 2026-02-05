@@ -158,8 +158,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             obj: Iterable[Model],
             *,
             many: Literal[True],
-        ) -> list[dict[str, Any]]:
-            ...
+        ) -> list[dict[str, Any]]: ...
 
         @overload
         def dump(
@@ -167,8 +166,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             obj: Model,
             *,
             many: Literal[False] | None = None,
-        ) -> dict[str, Any]:
-            ...
+        ) -> dict[str, Any]: ...
 
         def dump(
             self,
@@ -209,8 +207,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             *args: Any,
             many: Literal[True],
             **kwargs: Any,
-        ) -> str:
-            ...
+        ) -> str: ...
 
         @overload
         def dumps(
@@ -219,8 +216,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             *args: Any,
             many: Literal[False] | None = None,
             **kwargs: Any,
-        ) -> str:
-            ...
+        ) -> str: ...
 
         def dumps(
             self,
@@ -240,8 +236,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             many: Literal[True],
             partial: bool | Sequence[str] | set[str] | None = None,
             unknown: str | None = None,
-        ) -> list[Model]:
-            ...
+        ) -> list[Model]: ...
 
         @overload
         def load(
@@ -251,8 +246,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             many: Literal[False] | None = None,
             partial: bool | Sequence[str] | set[str] | None = None,
             unknown: str | None = None,
-        ) -> Model:
-            ...
+        ) -> Model: ...
 
         def load(
             self,
@@ -307,8 +301,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             partial: bool | Sequence[str] | set[str] | None = None,
             unknown: str | None = None,
             **kwargs: Any,
-        ) -> list[Model]:
-            ...
+        ) -> list[Model]: ...
 
         @overload
         def loads(
@@ -319,8 +312,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             partial: bool | Sequence[str] | set[str] | None = None,
             unknown: str | None = None,
             **kwargs: Any,
-        ) -> Model:
-            ...
+        ) -> Model: ...
 
         def loads(
             self,
