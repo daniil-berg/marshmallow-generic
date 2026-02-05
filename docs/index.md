@@ -78,4 +78,4 @@ Here is PyCharm with the example from above:
 
 ## Dependencies
 
-Python Version `3.9+` and `marshmallow` (duh)
+Python Version `3.10+` and `marshmallow` (duh)
