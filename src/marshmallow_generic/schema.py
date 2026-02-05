@@ -5,7 +5,6 @@ For details about the inherited methods and attributes, see the official
 documentation of [`marshmallow.Schema`][marshmallow.Schema].
 """
 
-from collections.abc import Iterable, Mapping, Sequence
 from typing import TYPE_CHECKING, Any, Literal, Optional, TypeVar, Union, overload
 from warnings import warn
 
@@ -13,6 +12,9 @@ from marshmallow import Schema, types
 
 from ._util import GenericInsightMixin1
 from .decorators import post_load
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Mapping, Sequence
 
 Model = TypeVar("Model")
 
@@ -54,11 +56,11 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
         *,
         only: types.StrSequenceOrSet | None = None,
         exclude: types.StrSequenceOrSet = (),
-        many: bool | None = None,
         load_only: types.StrSequenceOrSet = (),
         dump_only: types.StrSequenceOrSet = (),
         partial: bool | types.StrSequenceOrSet | None = None,
         unknown: types.UnknownOption | None = None,
+        many: bool | None = None,
     ) -> None:
         """
         Emits a warning, if the `many` argument is not `False`.

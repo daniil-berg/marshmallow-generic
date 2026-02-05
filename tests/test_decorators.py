@@ -1,4 +1,4 @@
-from collections.abc import Callable  # noqa: TCH003
+from collections.abc import Callable  # noqa: TC003
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
