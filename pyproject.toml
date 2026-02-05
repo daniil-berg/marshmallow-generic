@@ -107,6 +107,8 @@ omit = [
 
 [tool.ruff]
 cache-dir = ".cache/ruff"
+
+[tool.ruff.lint]
 select = [
     "F",    # pyflakes
     "E",    # pycodestyle errors
@@ -138,12 +140,10 @@ ignore = [
     "D212",   # Multi-line docstring summary should start at the first line -> ugly, D213 is better
     "D401",   # First line of docstring should be in imperative mood -> no, it shouldn't
     "D407",   # Missing dashed underline after section -> different docstring style
-    "ANN101", # Missing type annotation for self in method -> unnecessary
-    "ANN102", # Missing type annotation for cls in classmethod -> unnecessary
     "ANN401", # Dynamically typed expressions (typing.Any) are disallowed -> we'll use it sparingly
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "src/**/__init__.py" = [
     "A001", # Variable {name} is shadowing a Python builtin
     "D104", # Missing docstring in public package
@@ -155,6 +155,9 @@ ignore = [
     "D102", # Missing docstring in public method
     "D104", # Missing docstring in public package
 ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 ###################
 # Import sorting: #
