@@ -9,7 +9,7 @@ echo '  isort - consistent imports'
 isort src/ tests/ --check-only
 
 echo '  ruff - extensive linting'
-ruff src/ tests/
+ruff check src/ tests/
 
 echo '  black - consistent style'
 run_and_capture black src/ tests/ --check
