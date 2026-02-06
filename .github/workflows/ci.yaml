@@ -26,7 +26,7 @@ jobs:
     name: Test
     uses: daniil-berg/reusable-workflows/.github/workflows/python-test.yaml@v0.2.2
     with:
-      versions: '["3.9", "3.10", "3.11"]'
+      versions: '["3.10", "3.11", "3.12", "3.13", "3.14"]'
       unittest-command: 'scripts/test.sh'
       coverage-command: 'scripts/cov.sh'
       unittest-requirements: "-e '.[dev]'"
