@@ -1,4 +1,4 @@
-__copyright__ = "© 2023 Daniil Fajnberg"
+__copyright__ = "© 2023 Daniel Fainberg"
 __license__ = """Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");

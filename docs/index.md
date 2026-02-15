@@ -79,3 +79,9 @@ Here is PyCharm with the example from above:
 ## Dependencies
 
 Python Version `3.10+` and `marshmallow` (duh)
+
+---
+
+© 2023 Daniel Fainberg
+
+Licence: Apache-2.0

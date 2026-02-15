@@ -9,10 +9,10 @@ build-backend = "setuptools.build_meta"
 name = "marshmallow-generic"
 description = "Generic schema with full typing support and minimal boilerplate"
 authors = [
-    { name = "Daniil Fajnberg", email = "mail@daniil.fajnberg.de" },
+    { name = "Daniel Fainberg", email = "mail@daniel.fainberg.net" },
 ]
 maintainers = [
-    { name = "Daniil Fajnberg", email = "mail@daniil.fajnberg.de" },
+    { name = "Daniel Fainberg", email = "mail@daniel.fainberg.net" },
 ]
 requires-python = ">=3.10, <4.0"
 keywords = [
