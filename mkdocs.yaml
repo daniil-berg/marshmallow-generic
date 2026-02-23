@@ -35,7 +35,7 @@ plugins:
             show_root_toc_entry: false
             separate_signature: true
             show_signature_annotations: true
-          import:
+          inventories:
             - https://marshmallow.readthedocs.io/en/stable/objects.inv
 
 markdown_extensions:
