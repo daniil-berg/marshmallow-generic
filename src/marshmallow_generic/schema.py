@@ -98,10 +98,10 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
                     safety that this class aims to provide. Passing `True`
                     will therefore trigger a warning. You should instead use
                     the method-specific `many` parameter, when calling
-                    [`dump`][marshmallow_generic.GenericSchema.dump]/
-                    [`dumps`][marshmallow_generic.GenericSchema.dumps] or
-                    [`load`][marshmallow_generic.GenericSchema.load]/
-                    [`loads`][marshmallow_generic.GenericSchema.loads].
+                    [`dump`][marshmallow_generic.schema.GenericSchema.dump]/
+                    [`dumps`][marshmallow_generic.schema.GenericSchema.dumps] or
+                    [`load`][marshmallow_generic.schema.GenericSchema.load]/
+                    [`loads`][marshmallow_generic.schema.GenericSchema.loads].
         """
         self._pre_init = True
         super().__init__(
@@ -225,7 +225,7 @@ class GenericSchema(GenericInsightMixin1[Model], Schema):
             many: bool | None = None,
             **kwargs: Any,
         ) -> str:
-            """Same as [`dump`][marshmallow_generic.GenericSchema.dump], but returns a JSON-encoded string."""
+            """Same as [`dump`][marshmallow_generic.schema.GenericSchema.dump], but returns a JSON-encoded string."""
             ...
 
         @overload  # type: ignore[override]
