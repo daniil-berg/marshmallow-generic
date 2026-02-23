@@ -24,7 +24,7 @@ on:
 jobs:
   test:
     name: Test
-    uses: daniil-berg/reusable-workflows/.github/workflows/python-test.yaml@v0.2.2
+    uses: daniil-berg/reusable-workflows/.github/workflows/python-test.yaml@v0.3.0
     with:
       versions: '["3.10", "3.11", "3.12", "3.13", "3.14"]'
       unittest-command: 'scripts/test.sh'
@@ -40,7 +40,7 @@ jobs:
     name: Release
     if: ${{ github.ref_type == 'tag' }}
     needs: test
-    uses: daniil-berg/reusable-workflows/.github/workflows/python-release.yaml@v0.2.2
+    uses: daniil-berg/reusable-workflows/.github/workflows/python-release.yaml@v0.3.0
     with:
       git-ref: ${{ github.ref_name }}
     secrets:
