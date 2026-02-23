@@ -2,12 +2,13 @@
 # Python packaging: #
 
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "marshmallow-generic"
 description = "Generic schema with full typing support and minimal boilerplate"
+readme = "README.md"
 authors = [
     { name = "Daniel Fainberg", email = "mail@daniel.fainberg.net" },
 ]
@@ -16,7 +17,12 @@ maintainers = [
 ]
 requires-python = ">=3.10, <4.0"
 keywords = [
-
+    "generic",
+    "marshmallow",
+    "schema",
+    "validation",
+    "deserialization",
+    "serialization",
 ]
 license = { text = "Apache Software License Version 2.0" }
 classifiers = [
@@ -32,10 +38,9 @@ classifiers = [
     "Intended Audience :: Developers",
     "Typing :: Typed",
 ]
-dynamic = [
-    "dependencies",
-    "readme",
-    "version",
+dynamic = ["version"]
+dependencies = [
+    "marshmallow>=4.0.0",
 ]
 
 [project.optional-dependencies]
@@ -53,10 +58,50 @@ dev = [
 "Issue Tracker" = "https://github.com/daniil-berg/marshmallow-generic/issues"
 "Documentation" = "http://daniil-berg.github.io/marshmallow-generic"
 
-[tool.setuptools.dynamic]
-dependencies = { file = "requirements/common.txt" }
-readme = { file = ["README.md"], content-type = "text/markdown" }
-version = { attr = "marshmallow_generic.__version__" }
+[tool.hatch.version]
+path = "src/marshmallow_generic/__init__.py"
+
+
+#########################
+# Virtual environments: #
+
+[tool.hatch.envs.default]
+installer = "uv"
+extra-dependencies = []
+features = [
+  "dev",
+]
+
+[[tool.hatch.envs.default.matrix]]
+python = ["3.10", "3.11", "3.12", "3.13", "3.14"]
+
+[tool.hatch.envs.default.scripts]
+cache-clear = "rm -rf .cache/"
+check = "ruff check {args:src/ tests/}"
+ci = [
+    "check",
+    "format-diff",
+    "types",
+    "test",
+]
+fix = "check --fix"
+format = "ruff format {args:src/ tests/}"
+format-diff = "format --diff"
+test = "scripts/test.sh"
+types = "mypy {args:src/ tests/}"
+
+[tool.hatch.envs.hatch-static-analysis]
+config-path = "none"  # explicitly use custom ruff config below
+
+[tool.hatch.envs.hatch-static-analysis.scripts]
+# The following are essentially duplicates of the `check`, `fix`, `format`, and `format-diff` scripts
+# from the default environment defined above.
+# They serve as a convenient shortcut via the built in `hatch fmt` command.
+format-check = "format-fix --diff"
+format-fix = "ruff format {args:src/ tests/}"
+lint-check = "ruff check {args:src/ tests/}"
+lint-fix = "lint-check --fix"
+
 
 #########################
 # Static type checking: #
@@ -73,6 +118,7 @@ show_error_codes = true
 plugins = [
 
 ]
+
 
 #######################
 # Unit test coverage: #
@@ -100,12 +146,16 @@ omit = [
     "tests/*",
 ]
 
+
 ###############################
 # Linting and style checking: #
 
 [tool.ruff]
 cache-dir = ".cache/ruff"
 line-length = 80
+
+[tool.ruff.format]
+line-ending = "lf"
 
 [tool.ruff.lint]
 select = [

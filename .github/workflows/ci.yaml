@@ -31,10 +31,10 @@ jobs:
       coverage-command: 'scripts/cov.sh'
       unittest-requirements: "-e '.[dev]'"
       typecheck-command: 'scripts/typecheck.sh'
-      typecheck-requirements: '-Ur requirements/dev.txt'
+      typecheck-requirements: "-e '.[dev]'"
       typecheck-all-versions: true
       lint-command: 'scripts/lint.sh'
-      lint-requirements: '-Ur requirements/dev.txt'
+      lint-requirements: "-e '.[dev]'"
 
   release:
     name: Release
