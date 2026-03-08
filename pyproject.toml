@@ -50,7 +50,7 @@ dev = [
     "mkdocs-material==9.7.3",
     "mkdocstrings[python]==1.0.3",
     "mypy==1.19.1",
-    "ruff==0.15.4",
+    "ruff==0.15.5",
 ]
 
 [project.urls]
